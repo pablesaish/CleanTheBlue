@@ -22,7 +22,6 @@ const Hero = () => {
         </p>
         <p className="max-w-xl mx-auto mb-6 leading-relaxed text-lg">
           Cleanups. Community. Change.
-          
         </p>
         <button className="group inline-flex items-center gap-2 bg-white text-sky-700 font-semibold px-6 py-3 rounded-full shadow-lg cursor-pointer hover:bg-slate-100 transition duration-300 hover:-translate-y-0.5 overflow-hidden">
           Explore more
