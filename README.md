@@ -1,16 +1,44 @@
-# React + Vite
+# 🌊 CleanTheBlue
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**CleanTheBlue** is a full-stack web application designed to **empower communities to organize and participate in beach clean-up drives**.  
+It’s where tech meets tide — connecting people with a purpose to keep our coasts clean and blue. 💙
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## React Compiler
+- 🗓️ **Create & Join Clean-Up Events:**  
+  Users can host or register for local beach clean-up drives.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 📍 **Location-Based Event Discovery:**  
+  Find clean-ups near you using integrated map features.
 
-## Expanding the ESLint configuration
+- 👥 **Volunteer Community:**  
+  Track participation, connect with fellow volunteers, and build environmental awareness.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 📸 **Event Highlights:**  
+  Share before-and-after photos to showcase the impact.
+
+- 🔐 **Authentication & Profiles:**  
+  Secure login/signup system with personalized dashboards.
+
+---
+
+## 🏗️ Tech Stack
+
+| Layer | Technology Used |
+|-------|------------------|
+| **Frontend** | React.js + Tailwind CSS |
+| **Backend** | Node.js + Express.js |
+| **Database** | MongoDB (Mongoose ORM) |
+| **Authentication** | JWT (JSON Web Tokens) |
+| **Deployment** | Vercel / Render / Netlify (based on setup) |
+
+---
+
+## ⚙️ Installation & Setup
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/CleanTheBlue.git
+   cd CleanTheBlue
