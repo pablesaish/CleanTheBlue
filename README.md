@@ -40,5 +40,5 @@ It’s where tech meets tide — connecting people with a purpose to keep our co
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/CleanTheBlue.git
+   git clone https://github.com/pablesaish/CleanTheBlue.git
    cd CleanTheBlue
