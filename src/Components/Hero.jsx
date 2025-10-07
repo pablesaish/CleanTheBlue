@@ -10,12 +10,12 @@ const Hero = () => {
           rgba(168, 210, 255, 0.8), 
           rgba(41, 177, 204, 0.6), 
           rgba(110, 251, 220, 0.5)
-        ), url(${beachBg})`,
+        ), url(${beachBg})`,    
       }}
     >
       <div className="text-center max-w-4xl px-6">
         <h1 className="text-5xl md:text-6xl font-semibold drop-shadow-lg font-mono">
-          One Ocean, One Mission.
+          One Ocean,One Mission.
         </h1>
         <p className="max-w-xl mx-auto mt-4 mb-2 leading-relaxed text-lg">
           Thousands of hands, Millions of pieces removed.

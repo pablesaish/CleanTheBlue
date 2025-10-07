@@ -89,7 +89,7 @@ const RegistrationForm = ({ onSwitchToLogin }) => {
           required
           error={errors.password} 
         />
-        <button type="submit" className="w-full bg-black hover:bg-gray-800 text-white font-bold p-4 cursor-pointer transition duration-300">
+        <button type="submit" className="w-full bg-cyan-600 hover:bg-blue-700 text-white font-bold p-4 cursor-pointer transition duration-300">
           Register
         </button>
       </form>
@@ -146,7 +146,7 @@ const LoginForm = ({ onSwitchToRegister }) => {
           required 
           error={errors.password} 
         />
-        <button type="submit" className="w-full bg-black hover:bg-gray-800 text-white font-bold p-4 cursor-pointer  transition duration-300">
+        <button type="submit" className="w-full bg-cyan-600 hover:bg-blue-700 text-white font-bold p-4 cursor-pointer  transition duration-300">
           Login
         </button>
       </form>
@@ -169,8 +169,8 @@ function Login() {
   const [isLoginView, setIsLoginView] = React.useState(true);
 
   return (
-    <div className="bg-[#caf0f8] min-h-screen flex items-center justify-center p-4">
-      <div className="relative w-full max-w-md bg-white p-8 md:p-12 rounded-xl overflow-hidden border-4 border-black shadow-[8px_8px_0_0_rgba(0,0,0,1)]">
+    <div className="w-full min-h-[100vh] bg-[linear-gradient(rgba(168,210,255,0.8),rgba(41,177,204,0.6),rgba(110,251,220,0.5)),url('/images/Beach_cleanup.jpg')] bg-cover bg-no-repeat  bg-center flex items-center justify-center p-4">
+      <div className="relative w-full max-w-md bg-white/70 p-8 md:p-12 rounded-xl overflow-hidden border-1 border-sky-300">
         <div>
           {isLoginView ? (
             <LoginForm onSwitchToRegister={() => setIsLoginView(false)} />
