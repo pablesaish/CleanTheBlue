@@ -1,15 +1,14 @@
 import React from "react";
 import beachBg from "/images/Beach_cleanup.jpg";
-
 const Hero = () => {
   return (
     <div
       className="w-full min-h-[100vh] flex items-center justify-center text-white bg-cover bg-center select-none"
       style={{
         backgroundImage: `linear-gradient(
-          rgba(168, 210, 255, 0.8), 
-          rgba(41, 177, 204, 0.6), 
-          rgba(110, 251, 220, 0.5)
+         rgba(168, 210, 255, 0.7), 
+         rgba(41, 177, 204, 0.6), 
+         rgba(110, 251, 220, 0.5)
         ), url(${beachBg})`,    
       }}
     >

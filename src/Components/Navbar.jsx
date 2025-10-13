@@ -6,11 +6,12 @@ const links = [
   { name: "About", href: "/about" },
   { name: "Events", href: "/events" },
   // { name: "Get Involved", href: "/get-involved" },
-  { name: "Blog", href: "/blog" },
+  // { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" }
 ];
 
 const Navbar = () => {
+
   return (
     <div className="navbar-container select-none">
       <nav className="navbar-nav flex justify-between items-center px-6 py-4 text-white">
