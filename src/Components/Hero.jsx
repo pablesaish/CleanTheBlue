@@ -48,8 +48,7 @@ const Hero = () => {
               Cleanups. Community. Change.
             </p>
             <button className="group inline-flex items-center gap-2 bg-white text-sky-700 font-semibold px-6 py-3 rounded-full shadow-lg cursor-pointer hover:bg-slate-100 transition duration-300 hover:-translate-y-0.5 overflow-hidden">
-              Explore more
-              <i className="fa-solid fa-arrow-right"></i>
+              <a href="/Events">Explore more<i className="fa-solid fa-arrow-right"></i></a>
             </button>
           </>
         )}

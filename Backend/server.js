@@ -4,6 +4,7 @@ const cors = require('cors');
 require('dotenv').config({ path: './config/config.env' }); // Make sure this path is correct!
 const itemsRouter = require('./routes/item');
 const usersRouter = require('./routes/users');
+
 console.log('Server starting...'); // Log 1
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(express.json());
 
 app.use('/api/item', itemsRouter);
 app.use('/api/users', usersRouter);
+
 console.log('Attempting to connect to MongoDB...'); // Log 3
 console.log('MONGO_URI from .env:', process.env.MONGO_URI ? '***** (URI is present)' : 'ERROR: MONGO_URI is NOT set!'); // Log 4
 

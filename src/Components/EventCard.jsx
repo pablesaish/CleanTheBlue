@@ -79,3 +79,5 @@ const EventCard = ({ event, onRegister, onUnregister }) => {
 };
 
 export default EventCard;
+
+

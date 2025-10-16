@@ -21,7 +21,7 @@ const Events = () => {
       id: 'event-india-1',
       title: 'Mumbai Beach Cleanup Drive',
       description: 'Join us to clean the iconic Juhu Beach. Every hand helps make a difference!',
-      date: '2024-07-28',
+      date: '2025-10-28',
       time: '07:00 AM',
       location: 'Juhu Beach, Mumbai',
       image: eventImageIndia1,
@@ -31,7 +31,7 @@ const Events = () => {
       id: 'event-india-2',
       title: 'Ganges River Cleaning Initiative',
       description: 'A dedicated effort to clear plastic and waste from the sacred banks of the Ganges.',
-      date: '2024-08-10',
+      date: '2025-11-10',
       time: '06:30 AM',
       location: 'Assi Ghat, Varanasi',
       image: eventImageIndia2,
@@ -41,7 +41,7 @@ const Events = () => {
       id: 'event-india-3',
       title: 'Kerala Backwaters Cleanup',
       description: 'Boating and cleaning operations across the serene backwaters of Alleppey.',
-      date: '2024-08-25',
+      date: '2025-11-25',
       time: '09:00 AM',
       location: 'Alleppey Backwaters, Kerala',
       image: eventImageIndia3,
@@ -51,7 +51,7 @@ const Events = () => {
       id: 'event-india-4',
       title: 'Chennai Coastal Awareness Camp',
       description: 'An interactive workshop on marine life conservation and plastic pollution solutions.',
-      date: '2024-09-05',
+      date: '2025-12-05',
       time: '04:00 PM',
       location: 'Marina Beach Promenade, Chennai',
       image: eventImageIndia4,
@@ -61,7 +61,7 @@ const Events = () => {
       id: 'event-india-5',
       title: 'Goa Beach & Reef Cleanup',
       description: 'Collaborative effort for beach cleaning and underwater reef protection in Goa.',
-      date: '2024-09-18',
+      date: '2025-12-18',
       time: '08:00 AM',
       location: 'Palolem Beach, Goa',
       image: eventImageIndia5, // Reusing image for demo
@@ -152,3 +152,5 @@ const Events = () => {
 };
 
 export default Events;
+
+

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import emailjs from '@emailjs/browser'; // <-- Import EmailJS
 
 const Contact = () => {
-  // Step 1: Manage Form Data with State
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -9,7 +9,6 @@ const Contact = () => {
     message: '',
   });
 
-  // Step 2: Handle Input Changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
@@ -18,20 +17,26 @@ const Contact = () => {
     }));
   };
 
-  // Step 3: Implement a Submit Handler
+  // Step 3: Implement the updated Submit Handler
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevents the default form submission (page reload)
-    // Here is where you would handle the form submission,
-    // for example, sending the data to a server or an email service.
-    console.log('Form data submitted:', formData);
-    alert('Thank you for your message! We will get back to you soon.');
-    // Optionally, you can clear the form after submission
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: '',
-    });
+    e.preventDefault(); // Prevents the default form submission
+
+    // Replace with your EmailJS Service ID, Template ID, and Public Key
+    emailjs.sendForm('service_mzfczlz', 'template_g7oumhn', e.target, 'IUo8yDTPalsNOllKr')
+      .then((result) => {
+        console.log('SUCCESS!', result.text);
+        alert('Thank you for your message! We will get back to you soon.');
+        // Clear the form after submission
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: '',
+        });
+      }, (error) => {
+        console.log('FAILED...', error.text);
+        alert('Failed to send the message, please try again.');
+      });
   };
 
   return (
@@ -49,14 +54,14 @@ const Contact = () => {
         <div className="max-w-4xl mx-auto px-4">
           <div className="bg-white shadow-md rounded-lg p-8">
             <h2 className="text-2xl font-semibold mb-6">Get in Touch</h2>
-            {/* Form with onSubmit handler */}
+            {/* The form tag itself doesn't need to change */}
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium">Full Name</label>
                 <input
                   type="text"
                   id="name"
-                  name="name"
+                  name="name" // This MUST match the variable in your EmailJS template
                   required
                   value={formData.name}
                   onChange={handleChange}
@@ -68,7 +73,7 @@ const Contact = () => {
                 <input
                   type="email"
                   id="email"
-                  name="email"
+                  name="email" // This MUST match the variable in your EmailJS template
                   required
                   value={formData.email}
                   onChange={handleChange}
@@ -80,7 +85,7 @@ const Contact = () => {
                 <input
                   type="text"
                   id="subject"
-                  name="subject"
+                  name="subject" // This MUST match the variable in your EmailJS template
                   value={formData.subject}
                   onChange={handleChange}
                   className="mt-1 w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500"
@@ -90,7 +95,7 @@ const Contact = () => {
                 <label htmlFor="message" className="block text-sm font-medium">Message</label>
                 <textarea
                   id="message"
-                  name="message"
+                  name="message" // This MUST match the variable in your EmailJS template
                   rows="5"
                   required
                   value={formData.message}

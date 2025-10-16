@@ -17,7 +17,8 @@ const Navbar = () => {
     { name: "Events", href: "/events" },
     // { name: "Get Involved", href: "/get-involved" },
     // { name: "Blog", href: "/blog" },
-    { name: "Contact", href: "/contact" }
+    { name: "Contact", href: "/contact" },
+    { name: "Donate", href: "/donate" }
   ];
 
   return (

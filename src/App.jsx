@@ -9,6 +9,7 @@ import Login from './Components/Login.jsx'
 import About from './screens/About.jsx'
 import Events from './screens/Events.jsx'
 import Contact from './screens/Contact.jsx'
+import Donate from './Components/Donate.jsx'
 import ItemsScreen from './screens/ItemsScreen.jsx';
 const App = () => {
 
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/about" element={<About />} />
         <Route path="/events" element={<Events />} />  
+        <Route path="/donate" element={<Donate/>} /> 
         <Route path="/contact" element={<Contact />} />
                 <Route path="/items" element={<ItemsScreen />} /> 
       </Routes>
