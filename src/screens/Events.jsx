@@ -1,194 +1,154 @@
+import React, { useState, useEffect, useContext } from 'react';
+import EventCard from '../Components/EventCard';
+import { AuthContext } from '../Components/AuthContext';
 
-import React, { useState, useRef } from 'react';
+// Placeholder event images for India-specific events
+import eventImageIndia1 from '/images/event_image1.jpg'; // Example: Beach cleanup in Mumbai
+import eventImageIndia2 from '/images/event_image2.jpg'; // Example: River cleanup in Varanasi
+import eventImageIndia3 from '/images/event_image3.jpg'; // Example: Lake cleanup in Kerala
+import eventImageIndia4 from '/images/event_image4.jpg'; // Example: Coastal awareness workshop
+import eventImageIndia5 from '/images/event_image5.jpg';
 
-function Events() {
-  const eventsRef = useRef(null);
+const Events = () => {
+  const { user } = useContext(AuthContext);
   const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [showEvents, setShowEvents] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const sampleEvents = [
+  // Dummy event data - India specific
+  const dummyEvents = [
     {
-      id: 1,
-      title: "India Coastal Cleanup Drive",
-      description: "Join thousands of volunteers across India's coastlines to remove plastic and waste from beaches and promote clean seas.",
-      date: "2025-09-20",
-      location: "Mumbai, Chennai, Kochi, and Vizag",
-      organizer: "Indian Coast Guard & Environment Ministry",
-      category: "Beach Cleanup",
-      participants: "2L+ volunteers"
+      id: 'event-india-1',
+      title: 'Mumbai Beach Cleanup Drive',
+      description: 'Join us to clean the iconic Juhu Beach. Every hand helps make a difference!',
+      date: '2025-10-28',
+      time: '07:00 AM',
+      location: 'Juhu Beach, Mumbai',
+      image: eventImageIndia1,
+      participants: 180,
     },
     {
-      id: 2,
-      title: "National River Cleanup Mission",
-      description: "A nationwide initiative to clean rivers like the Ganga, Yamuna, and Godavari, focusing on reducing water pollution.",
-      date: "2025-06-08",
-      location: "Across major river cities in India",
-      organizer: "National Mission for Clean Ganga (NMCG)",
-      category: "River Cleanup",
-      participants: "5L+ participants"
+      id: 'event-india-2',
+      title: 'Ganges River Cleaning Initiative',
+      description: 'A dedicated effort to clear plastic and waste from the sacred banks of the Ganges.',
+      date: '2025-11-10',
+      time: '06:30 AM',
+      location: 'Assi Ghat, Varanasi',
+      image: eventImageIndia2,
+      participants: 110,
     },
     {
-      id: 3,
-      title: "Save the Lakes Campaign",
-      description: "An awareness and cleanup event targeting pollution in urban lakes and promoting sustainable water conservation.",
-      date: "2025-11-15",
-      location: "Bengaluru, Hyderabad, Pune",
-      organizer: "Clean Water Foundation India",
-      category: "Conservation",
-      participants: "1K+ volunteers"
+      id: 'event-india-3',
+      title: 'Kerala Backwaters Cleanup',
+      description: 'Boating and cleaning operations across the serene backwaters of Alleppey.',
+      date: '2025-11-16',
+      time: '09:00 AM',
+      location: 'Alleppey Backwaters, Kerala',
+      image: eventImageIndia3,
+      participants: 90,
     },
     {
-      id: 4,
-      title: "Blue Planet Awareness Summit",
-      description: "A national conference uniting students, NGOs, and policymakers to discuss marine ecosystem protection and plastic waste reduction.",
-      date: "2025-10-12",
-      location: "Goa, India",
-      organizer: "Ocean India Initiative",
-      category: "Conference",
-      participants: "800+ attendees"
-    }
+      id: 'event-india-4',
+      title: 'Chennai Coastal Awareness Camp',
+      description: 'An interactive workshop on marine life conservation and plastic pollution solutions.',
+      date: '2025-12-01',
+      time: '04:00 PM',
+      location: 'Marina Beach Promenade, Chennai',
+      image: eventImageIndia4,
+      participants: 60,
+    },
+    {
+      id: 'event-india-5',
+      title: 'Goa Beach & Reef Cleanup',
+      description: 'Collaborative effort for beach cleaning and underwater reef protection in Goa.',
+      date: '2025-12-18',
+      time: '08:00 AM',
+      location: 'Palolem Beach, Goa',
+      image: eventImageIndia5, // Reusing image for demo
+      participants: 150,
+    },
   ];
 
-  const handleGetEvents = () => {
+  useEffect(() => {
+    // Simulate fetching events from an API
     setLoading(true);
-    setShowEvents(true);
-
     setTimeout(() => {
-      setEvents(sampleEvents);
+      setEvents(dummyEvents);
       setLoading(false);
-      setTimeout(() => {
-      eventsRef.current?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-    }, 1000);
+    }, 500);
+  }, []);
+
+  const handleRegister = (eventId) => {
+    if (!user || !user.email) {
+      alert("You must be logged in to register for an event.");
+      return;
+    }
+
+    const userRegistrations = JSON.parse(localStorage.getItem(`registrations_${user.email}`) || '[]');
+    if (!userRegistrations.includes(eventId)) {
+      const updatedRegistrations = [...userRegistrations, eventId];
+      localStorage.setItem(`registrations_${user.email}`, JSON.stringify(updatedRegistrations));
+      
+      setEvents(prevEvents => 
+        prevEvents.map(event => 
+          event.id === eventId ? { ...event, participants: event.participants + 1 } : event
+        )
+      );
+      alert(`Successfully registered for ${events.find(e => e.id === eventId)?.title || 'this event'}!`);
+    } else {
+      alert("You are already registered for this event.");
+    }
   };
 
-  const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString('en-US', options);
+  const handleUnregister = (eventId) => {
+    if (!user || !user.email) return;
+
+    const userRegistrations = JSON.parse(localStorage.getItem(`registrations_${user.email}`) || '[]');
+    const updatedRegistrations = userRegistrations.filter(id => id !== eventId);
+    localStorage.setItem(`registrations_${user.email}`, JSON.stringify(updatedRegistrations));
+    
+    setEvents(prevEvents => 
+      prevEvents.map(event => 
+        event.id === eventId ? { ...event, participants: event.participants - 1 } : event
+      )
+    );
+    alert(`Successfully unregistered from ${events.find(e => e.id === eventId)?.title || 'this event'}.`);
   };
+
+  const pageBg = '/images/Beach_cleanup.jpg'; // Your chosen background image
 
   return (
-    <div style={{ minHeight: '100vh', background: 'linear-gradient(to bottom, #eff6ff, #ecfeff)' }}>
-      <div style={{  backgroundImage: 'linear-gradient( rgba(112, 220, 226, 0.4)), url("/images/Beach_cleanup2.jpg")',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-      color: 'white',
-      padding: '4rem 1rem',
-      minHeight: '400px' }}>
-        <div style={{ maxWidth: '72rem', margin: '0 auto', textAlign: 'center' }}>
-          <h1 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '1rem' }}>Clean the Blue - Events</h1>
-          <p style={{ fontSize: '1.25rem', marginBottom: '2rem', opacity: 0.9 }}>
-            Discover opportunities to protect our oceans and marine life worldwide
-          </p>
-          <button
-            onClick={handleGetEvents}
-            disabled={loading}
-            style={{
-              background: 'white',
-              color: '#2563eb',
-              padding: '1rem 2rem',
-              borderRadius: '9999px',
-              fontWeight: '600',
-              fontSize: '1.125rem',
-              border: 'none',
-              cursor: loading ? 'not-allowed' : 'pointer',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem'
-            }}
-          >
-            {loading ? (
-              <>
-                ⏳ Loading Events...
-              </>
-            ) : (
-              <>
-                📅 View Global Events
-              </>
-            )}
-          </button>
+    <div
+      className="min-h-[100vh] py-20 px-4 sm:px-6 lg:px-8 text-white bg-cover bg-fixed bg-center select-none"
+      style={{
+        backgroundImage: `linear-gradient(
+         rgba(168, 210, 255, 0.7), 
+         rgba(41, 177, 204, 0.6), 
+         rgba(110, 251, 220, 0.5)
+        ), url(${pageBg})`,    
+      }}
+    >
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-5xl md:text-6xl font-extrabold text-center drop-shadow-lg mb-12 font-mono">
+          Upcoming Events in India
+        </h1>
+
+        {loading && <p className="text-center text-xl">Loading events...</p>}
+        {error && <p className="text-center text-xl text-red-300">Error: {error}</p>}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {events.map((event) => (
+            <EventCard
+              key={event.id}
+              event={event}
+              onRegister={handleRegister}
+              onUnregister={handleUnregister}
+            />
+          ))}
         </div>
       </div>
-
-      {showEvents && (
-        <div ref={eventsRef} style={{ maxWidth: '72rem', margin: '0 auto', padding: '3rem 1rem' }}>
-          {!loading && events.length > 0 && (
-            <>
-              <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-                <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>
-                  Upcoming Events ({events.length})
-                </h2>
-                <p style={{ color: '#6b7280' }}>
-                  Join these initiatives to make a difference for our oceans
-                </p>
-              </div>
-
-              <div style={{ display: 'grid', gap: '1.5rem' }}>
-                {events.map((event) => (
-                  <div
-                    key={event.id}
-                    style={{
-                      background: 'white',
-                      borderRadius: '0.75rem',
-                      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                      padding: '1.5rem',
-                      border: '1px solid #e5e7eb'
-                    }}
-                  >
-                    <div style={{ marginBottom: '0.75rem' }}>
-                      <span style={{
-                        background: '#dbeafe',
-                        color: '#1e40af',
-                        padding: '0.25rem 0.75rem',
-                        borderRadius: '9999px',
-                        fontSize: '0.75rem',
-                        fontWeight: '600'
-                      }}>
-                        {event.category}
-                      </span>
-                    </div>
-
-                    <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '0.75rem' }}>
-                      {event.title}
-                    </h3>
-
-                    <p style={{ color: '#6b7280', marginBottom: '1rem' }}>
-                      {event.description}
-                    </p>
-
-                    <div style={{ marginBottom: '1rem' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5rem' }}>
-                        <span style={{ marginRight: '0.5rem' }}>📅</span>
-                        <span style={{ fontSize: '0.875rem' }}>{formatDate(event.date)}</span>
-                      </div>
-
-                      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5rem' }}>
-                        <span style={{ marginRight: '0.5rem' }}>📍</span>
-                        <span style={{ fontSize: '0.875rem' }}>{event.location}</span>
-                      </div>
-
-                      <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <span style={{ marginRight: '0.5rem' }}>👥</span>
-                        <span style={{ fontSize: '0.875rem' }}>{event.participants}</span>
-                      </div>
-                    </div>
-
-                    <div style={{ paddingTop: '1rem', borderTop: '1px solid #e5e7eb' }}>
-                      <span style={{ fontSize: '0.875rem', color: '#6b7280' }}>
-                        By <span style={{ fontWeight: '600' }}>{event.organizer}</span>
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </>
-          )}
-        </div>
-      )}
     </div>
   );
-}
+};
 
-export default Events
+export default Events;

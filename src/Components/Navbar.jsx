@@ -1,20 +1,28 @@
-import React from "react";
-import { Link } from "react-router-dom";
-
-const links = [
-  { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  { name: "Events", href: "/events" },
-  // { name: "Get Involved", href: "/get-involved" },
-  // { name: "Blog", href: "/blog" },
-  { name: "Contact", href: "/contact" }
-];
+import React, { useContext } from "react"; // Import useContext
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
+import { AuthContext } from './AuthContext'; // Import AuthContext
 
 const Navbar = () => {
+  const { user, logout } = useContext(AuthContext); // Get user and logout from AuthContext
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login'); // Redirect to login after logout
+  };
+
+  const links = [
+    { name: "Home", href: "/" },
+    { name: "About", href: "/about" },
+    { name: "Events", href: "/events" },
+    // { name: "Get Involved", href: "/get-involved" },
+    // { name: "Blog", href: "/blog" },
+    { name: "Contact", href: "/contact" }
+  ];
 
   return (
     <div className="navbar-container select-none">
-      <nav className="navbar-nav flex justify-between items-center px-6 py-4 text-white">
+      <nav className="navbar-nav flex justify-between items-center px-10 py-6 text-white relative">
         <Link to="/" className="logo-link">
           <span className="logo-primary">CLEAN</span>
           <span className="logo-secondary">the</span>
@@ -32,11 +40,27 @@ const Navbar = () => {
         </ul>
 
         <ul className="auth-links-list">
-          <li>
-            <Link to="/login" className="login-button">
-              Login / Signup
-            </Link>
-          </li>
+          {user ? ( // Conditional rendering for logged-in user
+            <>
+              <li>
+                <span className="text-white text-lg mr-4">Hi, {user.name}!</span> {/* Display user's name */}
+              </li>
+              <li>
+                <button 
+                  onClick={handleLogout} 
+                  className="login-button"
+                >
+                  Logout
+                </button>
+              </li>
+            </>
+          ) : ( // Conditional rendering for logged-out user
+            <li>
+              <Link to="/login" className="login-button">
+                Login / Signup
+              </Link>
+            </li>
+          )}
         </ul>
       </nav>
     </div>
